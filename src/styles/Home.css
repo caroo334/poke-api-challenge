@@ -8,11 +8,14 @@
 }
 
 .home-input {
+  /* background-color: transparent; */
+  /* backdrop-filter: blur(21px); */
   width: 50px;
   margin: 5px;
   border: 1px solid rgb(197, 219, 136);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
   border-radius: 10px;
+  opacity: 0.9;
 }
 
 .home-container {

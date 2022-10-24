@@ -10,6 +10,7 @@
 } */
 
 .Button{
+  transition: all 0.2s ease;
   padding: 5px;
   display: flex;
   justify-content: center;
@@ -24,4 +25,8 @@
 
 .Button:hover {
   filter: grayscale(0.5);
+  cursor: pointer;
+  background-color: #499cad;
+  color: rgb(197, 219, 136);
+  opacity: 0.9;
 }
