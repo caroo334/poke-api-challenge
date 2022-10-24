@@ -1,7 +1,9 @@
-import './../styles/button.css';
+import "./../styles/button.css";
 
 export const Button = ({ onClick, children }) => {
   return (
-    <div className="Button" onClick={onClick}>{children}</div>
-  )
-}
+    <div className="Button" onClick={onClick}>
+      {children}
+    </div>
+  );
+};
