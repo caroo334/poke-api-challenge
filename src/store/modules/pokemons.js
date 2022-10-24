@@ -3,9 +3,13 @@ import axios from "axios";
 
 export const getAllPokemons = createAsyncThunk(
   "pokemons/getAllPokemons",
-  async () => {
+  async (numberOfPokemonsPerPage) => {
     try {
-      const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon");
+      const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon", {
+        params: {
+          limit: numberOfPokemonsPerPage
+        }
+      });
       console.log(data);
       return data;
     } catch (error) {

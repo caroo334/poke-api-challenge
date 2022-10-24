@@ -1,3 +1,5 @@
+import '../styles/ListPokemons.css';
+
 export const ListPokemons = ({ data }) => {
   function findImage(url) {
     let matchit = "" + url.match(/[^v2]([0-9]+)/gi);
