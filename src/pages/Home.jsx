@@ -18,7 +18,6 @@ function Home() {
   const nextPage = useSelector((state) => state.pokemons.allPokemons.next);
   const prevPage = useSelector((state) => state.pokemons.allPokemons.previous);
 
-
   const renderMainButton = () => {
     return <Button onClick={() => handleClick()}> Cargar Información </Button>;
   };
@@ -47,23 +46,24 @@ function Home() {
       <nav className="home-title">
         <h1>Pokedex</h1>
       </nav>
-      <div>
-        <Button onClick={handleClick}>bring by number</Button>{" "}
-        <input
-          defaultValue={inputPokemonsNumber}
-          value={inputPokemonsNumber}
-          onChange={handleChangeInputPokemonsNumber}
-          type="number"
-          placeholder="Cantidad de pokemons"
-        />
-      </div>
-
+      {allPokemonsState.count > 0 ? (
+        <div className="home-bring-number-list-container">
+          <input
+            defaultValue={inputPokemonsNumber}
+            value={inputPokemonsNumber}
+            onChange={handleChangeInputPokemonsNumber}
+            type="number"
+            placeholder="Cantidad de pokemons"
+            className="home-input"
+          />
+          <Button onClick={handleClick}>Bring</Button>{" "}
+        </div>
+      ) : null}
       <div className="home-pagination">
         {prevPage ? (
           <Button onClick={handleClickPrevPage}>Previus</Button>
         ) : null}
         <div>
-          
           {/* <button>1</button>
           <button>2</button>
           <button>3</button>
@@ -75,8 +75,11 @@ function Home() {
 
       {loadingState ? (
         <div className="home-loading">
-          <img src="https://i.pinimg.com/originals/5e/4a/8f/5e4a8f3747faaa61cffe65e66c18c318.gif" alt="" />
-        <div >CARGANDO</div>
+          <img
+            src="https://i.pinimg.com/originals/5e/4a/8f/5e4a8f3747faaa61cffe65e66c18c318.gif"
+            alt=""
+          />
+          <div>CARGANDO</div>
         </div>
       ) : allPokemonsState.count > 0 ? (
         <ListPokemons data={allPokemonsState.results} />
