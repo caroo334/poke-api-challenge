@@ -2,8 +2,17 @@
   display: flex;
   margin: 5px;
 }
-.home-pagination > input {
-  width: 90px;
+
+.home-bring-number-list-container {
+  display: flex;
+}
+
+.home-input {
+  width: 50px;
+  margin: 5px;
+  border: 1px solid rgb(197, 219, 136);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+  border-radius: 10px;
 }
 
 .home-container {
@@ -13,16 +22,16 @@
   align-items: center;
 }
 .home-title {
+  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 
-.home-loading > img{
+.home-loading > img {
   margin-top: 3rem;
   max-width: 350px;
   max-height: 350px;
   border-radius: 25px;
   /* background-image: url('https://i.pinimg.com/originals/5e/4a/8f/5e4a8f3747faaa61cffe65e66c18c318.gif'); */
 }
-
