@@ -7,22 +7,13 @@ import {
   getPrevPokemonsPage,
 } from "../store/modules/pokemons";
 import { Button } from "./Button";
+import { PokemonCard } from "./PokemonCard";
 
 export const ListPokemons = ({ data }) => {
   const dispatch = useDispatch();
   const [inputPokemonsNumber, setInputPokemonsNumber] = useState(20);
   const nextPage = useSelector((state) => state.pokemons.allPokemons.next);
   const prevPage = useSelector((state) => state.pokemons.allPokemons.previous);
-
-  function findImage(url) {
-    let matchit = "" + url.match(/[^v2]([0-9]+)/gi);
-    matchit = matchit.substring(1);
-    return (
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
-      matchit +
-      ".png"
-    );
-  }
 
   const handleChangeInputPokemonsNumber = (e) => {
     e.preventDefault();
@@ -62,17 +53,9 @@ export const ListPokemons = ({ data }) => {
         {nextPage ? <Button onClick={handleClickNextPage}>next</Button> : null}
       </div>
       <div className="box row ">
-        {data.map((e, i) => {
-          return (
-            <ul
-              key={`${e}_${i}`}
-              className="home-list-name-ul col-12 col-sm-6 col-md-3"
-            >
-              <li className="home-list-name-li ">{e.name}</li>{" "}
-              <img src={findImage(e.url)} alt="" className="img-fluid" />
-            </ul>
-          );
-        })}
+        {data.map((pokemon, i) => (
+          <PokemonCard key={`${pokemon.name}-${i}`} pokemon={pokemon} />
+        ))}
       </div>
     </div>
   );

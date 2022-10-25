@@ -1,8 +1,6 @@
 .loading {
-    margin-top: 3rem;
-    max-width: 350px;
-    max-height: 350px;
-    border-radius: 25px;
-    /* background-image: url('https://i.pinimg.com/originals/5e/4a/8f/5e4a8f3747faaa61cffe65e66c18c318.gif'); */
-  }
-  
+  margin-top: 3rem;
+  max-width: 350px;
+  max-height: 350px;
+  border-radius: 25px;
+}

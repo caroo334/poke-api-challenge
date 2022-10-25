@@ -1,9 +1,9 @@
-import '../styles/Loading.css';
+import "../styles/Loading.css";
 
 export const Loading = () => (
-    <img
+  <img
     className="loading"
     src={`${process.env.PUBLIC_URL}/pokeLoading.gif`}
-    alt='loading de pikachu'
-    />
-)
+    alt="loading de pikachu"
+  />
+);
