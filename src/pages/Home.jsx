@@ -1,101 +1,57 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "./../components/Button";
-import {
-  getAllPokemons,
-  getNextPokemonsPage,
-  getPrevPokemonsPage,
-} from "../store/modules/pokemons";
-// import Card from "../components/Card";
+import { getAllPokemons } from "../store/modules/pokemons";
 import { ListPokemons } from "../components/ListPokemons";
 import "../styles/Home.css";
-import { useState } from "react";
+import { Loading } from "../components/Loading";
+import { Error } from "../components/Error";
 
 function Home() {
-  const [inputPokemonsNumber, setInputPokemonsNumber] = useState(20);
   const dispatch = useDispatch();
   const loadingState = useSelector((state) => state.pokemons.loading);
   const allPokemonsState = useSelector((state) => state.pokemons.allPokemons);
-  const nextPage = useSelector((state) => state.pokemons.allPokemons.next);
-  const prevPage = useSelector((state) => state.pokemons.allPokemons.previous);
-
-  const renderMainButton = () => {
-    return <Button onClick={() => handleClick()}> Cargar Información </Button>;
-  };
+  const error = useSelector((state) => state.pokemons.error);
 
   const handleClick = () => {
-    dispatch(getAllPokemons(inputPokemonsNumber));
+    dispatch(getAllPokemons());
   };
 
-  const handleClickNextPage = (e) => {
-    e.preventDefault();
-    dispatch(getNextPokemonsPage(nextPage));
-  };
-
-  const handleClickPrevPage = (e) => {
-    e.preventDefault();
-    dispatch(getPrevPokemonsPage(prevPage));
-  };
-
-  const handleChangeInputPokemonsNumber = (e) => {
-    e.preventDefault();
-    setInputPokemonsNumber(e.target.value);
+  const renderPokemonsList = () => {
+    if (error) {
+      if (error?.message === "Network Error") {
+        return (
+          <Error
+            onRetry={handleClick}
+            message="Revisa tu conección a internet... 🥲"
+          />
+        );
+      } else {
+        return (
+          <Error
+            onRetry={handleClick}
+            message="Ocurrio un error, vuelva a intentar! 🥹"
+          />
+        );
+      }
+    } else {
+        return <ListPokemons data={allPokemonsState.results} />;
+      }
   };
 
   return (
     <div className="home-container">
       <nav className="home-title">
-        <h1>Pokedex</h1>
+        <h1> Pokedex</h1>
       </nav>
-      {allPokemonsState.count > 0 ? (
-        <div className="home-bring-number-list-container">
-          <input
-            defaultValue={inputPokemonsNumber}
-            value={inputPokemonsNumber}
-            onChange={handleChangeInputPokemonsNumber}
-            type="number"
-            placeholder="Cantidad de pokemons"
-            className="home-input"
-          />
-          <Button onClick={handleClick}>Bring</Button>{" "}
-        </div>
-      ) : null}
-      <div className="home-pagination">
-        {prevPage ? (
-          <Button onClick={handleClickPrevPage}>Previus</Button>
-        ) : null}
-        <div>
-          {/* <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <p>...</p>
-          <button>{Math.round(allPokemonsState.count / inputPokemonsNumber)}</button> */}
-        </div>
-        {nextPage ? <Button onClick={handleClickNextPage}>Next</Button> : null}
-      </div>
 
       {loadingState ? (
-        <div className="home-loading">
-          <img
-            src="https://i.pinimg.com/originals/5e/4a/8f/5e4a8f3747faaa61cffe65e66c18c318.gif"
-            alt=""
-          />
-          <div>CARGANDO</div>
-        </div>
-      ) : allPokemonsState.count > 0 ? (
-        <ListPokemons data={allPokemonsState.results} />
+        <Loading />
+      ) : allPokemonsState.count > 0 || error ? (
+        renderPokemonsList()
       ) : (
-        renderMainButton()
+        <Button onClick={() => handleClick()}> Cargar Información </Button>
       )}
     </div>
-    // <div className="App d-flex">
-    //   <div className="container">
-    //     <div className="row min-vh-100">
-    //       <div className="col-6 m-auto">
-
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
 

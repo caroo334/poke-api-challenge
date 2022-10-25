@@ -1,20 +1,15 @@
-/* .Button {
+.Button {
   transition: all 0.2s ease;
-  cursor: pointer;
-  border-radius: 4px;
-  background: blue;
-  width: fit-content;
-  margin: auto;
-  color: white;
-  padding: 8px 10px;
-} */
-
-.Button{
   padding: 5px;
+  margin-left: 5px;
   display: flex;
   justify-content: center;
   color: #22223b;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1)
+  );
   backdrop-filter: blur(21px);
   -webkit-backdrop-filter: blur(21px);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
@@ -24,4 +19,8 @@
 
 .Button:hover {
   filter: grayscale(0.5);
+  cursor: pointer;
+  background-color: #499cad;
+  color: rgb(197, 219, 136);
+  opacity: 0.9;
 }

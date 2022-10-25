@@ -7,13 +7,12 @@ export const getAllPokemons = createAsyncThunk(
     try {
       const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon", {
         params: {
-          limit: numberOfPokemonsPerPage
-        }
+          limit: numberOfPokemonsPerPage,
+        },
       });
-      console.log(data);
       return data;
     } catch (error) {
-      throw new error();
+      throw error;
     }
   }
 );
@@ -47,16 +46,21 @@ const pokemonsSlice = createSlice({
     allPokemons: [],
     loading: false,
     error: null,
+    pokemonDetail: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAllPokemons.pending, (state, action) => {
       state.loading = true;
+      state.error = null;
     });
+
     builder.addCase(getAllPokemons.fulfilled, (state, action) => {
       state.loading = false;
+      state.error = null;
       state.allPokemons = action.payload;
     });
+
     builder.addCase(getAllPokemons.rejected, (state, action) => {
       state.error = action.error;
       state.loading = false;
@@ -64,10 +68,12 @@ const pokemonsSlice = createSlice({
 
     builder.addCase(getNextPokemonsPage.pending, (state, action) => {
       state.loading = true;
+      state.error = null;
     });
 
-    builder.addCase(getNextPokemonsPage.fulfilled, (state,action) => {
+    builder.addCase(getNextPokemonsPage.fulfilled, (state, action) => {
       state.loading = false;
+      state.error = null;
       state.allPokemons = action.payload;
     });
 
@@ -78,10 +84,12 @@ const pokemonsSlice = createSlice({
 
     builder.addCase(getPrevPokemonsPage.pending, (state, action) => {
       state.loading = true;
+      state.error = null;
     });
 
-    builder.addCase(getPrevPokemonsPage.fulfilled, (state,action) => {
+    builder.addCase(getPrevPokemonsPage.fulfilled, (state, action) => {
       state.loading = false;
+      state.error = null;
       state.allPokemons = action.payload;
     });
 
@@ -89,7 +97,6 @@ const pokemonsSlice = createSlice({
       state.error = action.error;
       state.loading = false;
     });
-
   },
 });
 
